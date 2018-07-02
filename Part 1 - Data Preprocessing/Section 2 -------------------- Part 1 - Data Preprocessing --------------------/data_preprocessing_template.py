@@ -32,5 +32,37 @@ Y = labelEncoder_Y.fit_transform(Y)
 onehotEncoder = OneHotEncoder(categorical_features = [0]) # <-- Works well when already in label encoding!
 X = onehotEncoder.fit_transform(X).toarray()
 
+#Breaking the dataset into a test and training set
+#SO the ML model can run its correllations on a test set to validate decision
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
+
+
 df = pd.DataFrame(X)
 df2 = pd.DataFrame(Y)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
