@@ -2,6 +2,8 @@
 
 #Importing the dataset
 dataset = read.csv('Data.csv')
+#Breaking a dataset into columns
+dataset2 = dataset[, 2:3]
 
 #Taking care of the missing data
 dataset$Age = ifelse(is.na(dataset$Age), 
@@ -34,6 +36,8 @@ test_set = subset(dataset, split==FALSE)
 #Feature scalingg
 training_set[, 2:3] = scale(training_set[, 2:3])
 test_set[, 2:3] = scale(test_set[, 2:3])
+
+
 
 
 
