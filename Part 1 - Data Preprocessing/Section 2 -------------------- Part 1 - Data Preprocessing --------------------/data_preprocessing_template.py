@@ -19,5 +19,18 @@ from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values="NaN", strategy="mean", axis=0)
 X[:, 1:3] = imputer.fit(X[:, 1:3]).transform(X[:, 1:3]) #Why 3? Upper bound is excluded
 
-df = pd.DataFrame(X)
+#Encodes catagorical data with integers --> France, Spain, Germany --> 1,2,3
+#This leads to issues with comparisons. ML models will assign values to the encoding
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+labelEncoder_X = LabelEncoder()
+labelEncoder_Y = LabelEncoder()
+X[:,0] = labelEncoder_X.fit_transform(X[:,0])
+Y = labelEncoder_Y.fit_transform(Y)
 
+#Encodes catagorial data using the dummy encoding method
+#create a number of colums and uses 0's and 1's to identify 
+onehotEncoder = OneHotEncoder(categorical_features = [0]) # <-- Works well when already in label encoding!
+X = onehotEncoder.fit_transform(X).toarray()
+
+df = pd.DataFrame(X)
+df2 = pd.DataFrame(Y)
